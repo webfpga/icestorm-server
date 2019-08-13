@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+##
+## pip install websocket-client
+##
 
 SERVER="ws://icestorm.webfpga.io:2019"
 
