@@ -18,7 +18,7 @@ RUN npm install
 
 # Copy Node.js application source
 COPY ./server/app.js .
-COPY ./server/synthesis/ .
+COPY ./server/synthesis/ ./synthesis
 
 # Start Node.js app
 CMD ["node", "app.js"]
