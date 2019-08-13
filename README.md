@@ -35,7 +35,7 @@ $ node app.js
 ```
 
 ### Docker
-You can host `icestorm-server` via Docker. This is by far the easiest method to
+Or... you can host `icestorm-server` via Docker. This is by far the easiest method to
 up and running. For example, if you are running MacOS, all you need is Python
 and Docker to get started with the WebFPGA Standalone Board. (That is, if you
 want to go the fully open-source and self-hosted route. Remember, you can
