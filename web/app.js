@@ -44,38 +44,44 @@ wss.on("connection", ws => {
 
 // Synthesis Request
 async function synthesize(ws, data) {
-  console.log("Recieved Synthesis Request...");
+  const log = function() {
+    console.log(...arguments);
+    ws.send(JSON.stringify({type: "log", arguments}));
+  };
+
+  log("Recieved Synthesis Request...");
 
   // Generate a temp directory
-  console.log("Generating temp directory...");
+  log("Generating temp directory...");
   const tmpdir = fs.mkdtempSync(path.join(os.tmpdir(), "icestorm-server_"));
-  console.log(tmpdir);
+  log(tmpdir);
 
   try {
     // Save the files the the temp directory, then synthesize the HDL.
-    console.log("Saving source files to temp directory...");
+    log("Saving source files to temp directory...");
     for (let file of data.files) {
-      console.log(file.name);
+      log(file.name);
       fs.writeFileSync(`${tmpdir}/${file.name}`, file.body);
     }
 
     // Run the IceStorm toolchain flow
-    console.log("Running IceStorm flow with Make...");
-    const bitstream = await run_icestorm_make(tmpdir, data.top_module);
+    log("Running IceStorm flow with Make...");
+    const bitstream = await run_icestorm_make(log, tmpdir, data.top_module);
 
     // Send the compressed bitstream to the WebSocket client.
-    ws.send(JSON.stringify({type: "bitstream", bitstream}));
+    /*ws.send(JSON.stringify({type: "bitstream", bitstream}));*/
   } catch (e) {
     console.error(e);
-    console.error("error: unable to synthesize");
+    log(e.toString());
+    log("error: unable to synthesize");
   } finally {
     // Purge temp directory
-    console.log("Purging temp directory...", tmpdir);
+    log("Purging temp directory...", tmpdir);
     rmdir(tmpdir);
   }
 }
 
-function run_icestorm_make(dir, top_module) {
+function run_icestorm_make(ws_log, dir, top_module) {
   // Spawn IceStorm + Make toolchain flow
   const args = [`BUILD_DIR=${dir}`, `TOP_MODULE=${top_module}`];
   const proc = spawn("make", args, {cwd: "./synthesis/"});
@@ -84,6 +90,7 @@ function run_icestorm_make(dir, top_module) {
   const log = data => {
     const str = data.toString();
     process.stdout.write(str);
+    ws_log(str);
   };
   proc.stdout.setEncoding("utf-8");
   proc.stdout.on("data", log);
@@ -93,7 +100,7 @@ function run_icestorm_make(dir, top_module) {
   // Grab the compressed bitstream and return it via a Promise
   return new Promise(resolve => {
     proc.on("close", status => {
-      console.log("make exit code = " + status);
+      log("make exit code = " + status);
       const bitstream = fs.readFileSync(`${dir}/out.bin.cbin`);
       resolve(bitstream);
     });
