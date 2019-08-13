@@ -8,7 +8,8 @@ all:
 	# synthesize using Yosys
 	yosys -p "synth_ice40 -top fpga_top -blif $(BUILD)/$(PROJ).blif" $(VERILOG_SOURCE_DIR)
 	# Place and route using arachne
-	arachne-pnr -d $(DEVICE) -P $(FOOTPRINT) -o $(BUILD)/$(PROJ).asc -p pinmap.pcf $(BUILD)/$(PROJ).blif
+	arachne-pnr -d $(DEVICE) -P $(FOOTPRINT) -o $(BUILD)/$(PROJ).asc\
+				-p $(VERILOG_SOURCE_DIR)/pinmap.pcf $(BUILD)/$(PROJ).blif
 	# Convert to bitstream using IcePack
 	icepack $(BUILD)/$(PROJ).asc $(BUILD)/$(PROJ).bin
 
