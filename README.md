@@ -40,5 +40,5 @@ always navigate to the official Web IDE (https://beta.webfpga.io) to get
 started without any install or software dependencies.)
 
 ```console
-$ docker run -it --rm webfpga/icestorm-server:latest -p 2019:2019
+$ docker run -it --rm -p 2019:2019 webfpga/icestorm-server:latest
 ```
