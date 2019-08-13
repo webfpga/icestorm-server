@@ -32,11 +32,13 @@ $ webfpga flash bitstream.bin
 ```
 
 ### Docker
-You can host `icestorm-server` via Docker. This is by far the easiest way to get started.
-For example, if you are running MacOS, all you need is Python and Docker to get
-started with the WebFPGA Standalone Board. (That is, if you want to go the
-fully open-source and self-hosted route. Remebmer, you can always navigate to the official
-Web IDE (https://beta.webfpga.io) to get started without any install or software dependencies.)
+You can host `icestorm-server` via Docker. This is by far the easiest method to
+up and running. For example, if you are running MacOS, all you need is Python
+and Docker to get started with the WebFPGA Standalone Board. (That is, if you
+want to go the fully open-source and self-hosted route. Remember, you can
+always navigate to the official Web IDE (https://beta.webfpga.io) to get
+started without any install or software dependencies.)
+
 ```console
 $ docker run -it --rm webfpga/icestorm-server:latest -p 2019:2019
 ```
