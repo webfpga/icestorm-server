@@ -5,6 +5,7 @@ SERVER="ws://localhost:2019"
 import sys
 import json
 import base64
+from websocket import create_connection
 
 # Usage information
 if len(sys.argv) <= 2:
@@ -19,7 +20,6 @@ top_module = sys.argv[1]
 files = sys.argv[2:]
 
 # Create WebSocket Connection
-from websocket import create_connection
 ws = create_connection(SERVER)
 
 # Generate and send synthesis request
