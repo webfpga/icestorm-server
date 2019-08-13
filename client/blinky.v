@@ -1,4 +1,4 @@
-module top(input wire WF_CLK, output reg WF_LED);
+module top(input wire WF_CLK, input wire WF_BUTTON, output reg WF_LED);
     reg [23:0] counter;
 
     always @(posedge WF_CLK) begin
