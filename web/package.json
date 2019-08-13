@@ -1,0 +1,25 @@
+{
+  "name": "icestorm-server",
+  "version": "0.0.1",
+  "description": "IceStorm Web Server - Compatible with WebFPGA",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/webfpga/icestorm-server.git"
+  },
+  "keywords": [
+    "icestorm",
+    "fpga",
+    "webfpga",
+    "lattice"
+  ],
+  "author": "Ryan Jacobs",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/webfpga/icestorm-server/issues"
+  },
+  "homepage": "https://github.com/webfpga/icestorm-server#readme"
+}
