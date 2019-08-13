@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-SERVER="ws://localhost:2019"
+SERVER="ws://icestorm.webfpga.io:2019"
 
 import sys
 import json
@@ -12,7 +12,7 @@ if len(sys.argv) <= 2:
     print(f"Usage: {sys.argv[0]} <top_module_name> <source.v> [pinmap.pcf] [source.v ...]\n")
     print("Send a set of Verilog source files to a remote IceStorm synthesis toolchain flow.")
     print("The resulting bitstream is saved as 'bitstream.bin'\n")
-    print(f"Example: {sys.argv[0]} fpga_top blinky.v")
+    print(f"Example: {sys.argv[0]} fpga_top blinky.v pinmap.pcf")
     sys.exit()
 
 # Parse arguments
