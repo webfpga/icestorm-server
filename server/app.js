@@ -25,6 +25,7 @@ wss.on("connection", ws => {
     } catch (e) {
       console.error("error: unable to parse JSON");
       data = {type: "JSON_Error"};
+      ws.send(JSON.stringify({type: "error", msg: "bad JSON"}));
     }
 
     // Route Requests
@@ -34,6 +35,7 @@ wss.on("connection", ws => {
         break;
 
       default:
+        ws.send(JSON.stringify({type: "error", msg: "unrecognized data type"}));
         console.error("error: unrecognized data type:", data.type);
         break;
     }
@@ -76,6 +78,7 @@ async function synthesize(ws, data) {
   } catch (e) {
     console.error(e);
     log("error: unable to synthesize", e.toString());
+    ws.send(JSON.stringify({type: "error", msg: "unable to synthesize"}));
   } finally {
     // Purge temp directory
     log("Purging temp directory...", tmpdir);
