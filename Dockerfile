@@ -12,5 +12,12 @@ RUN apt-get update && apt-get install -y nodejs npm
 
 # Install NPM dependencies
 WORKDIR /app
-COPY ./server/package*.json .
+COPY ./server/package*.json ./
 RUN npm install
+
+# Copy Node.js application source
+COPY ./server/app.js .
+COPY ./server/synthesis .
+
+# Start Node.js app
+CMD ["node", "app.js"]
