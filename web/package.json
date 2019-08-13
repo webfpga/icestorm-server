@@ -21,5 +21,8 @@
   "bugs": {
     "url": "https://github.com/webfpga/icestorm-server/issues"
   },
-  "homepage": "https://github.com/webfpga/icestorm-server#readme"
+  "homepage": "https://github.com/webfpga/icestorm-server#readme",
+  "dependencies": {
+    "ws": "^7.1.2"
+  }
 }
