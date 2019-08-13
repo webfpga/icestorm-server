@@ -8,7 +8,7 @@ RUN apt-get update && apt-get install -y \
         qt5-default python3-dev libboost-all-dev cmake
 
 # Node.js for the web server
-RUN apt-get update && apt-get install nodejs npm
+RUN apt-get update && apt-get install -y nodejs npm
 
 # Install NPM dependencies
 WORKDIR /app
