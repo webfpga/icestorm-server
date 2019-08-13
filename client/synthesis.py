@@ -16,7 +16,7 @@ if len(sys.argv) <= 2:
     print("Send a set of Verilog source files to a remote IceStorm synthesis toolchain flow.")
     print("The resulting bitstream is saved as 'bitstream.bin'\n")
     print(f"Example: {sys.argv[0]} fpga_top blinky.v pinmap.pcf")
-    sys.exit()
+    sys.exit(1)
 
 # Parse arguments
 top_module = sys.argv[1]
@@ -47,7 +47,7 @@ while True:
     elif data["type"] == "error":
         print("FATAL ERROR:", data["msg"])
         ws.close()
-        sys.exit()
+        sys.exit(1)
 
     # Log message... print it.
     elif data["type"] == "log":
