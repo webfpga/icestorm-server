@@ -69,7 +69,10 @@ async function synthesize(ws, data) {
     const bitstream = await run_icestorm_make(log, tmpdir, data.top_module);
 
     // Send the compressed bitstream to the WebSocket client.
-    ws.send(JSON.stringify({type: "bitstream", bitstream}));
+    ws.send(JSON.stringify({
+      type: "bitstream",
+      bitstream: bitstream.toString("base64")
+    }));
   } catch (e) {
     console.error(e);
     log("error: unable to synthesize", e.toString());
