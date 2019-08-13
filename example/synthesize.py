@@ -22,8 +22,12 @@ files = sys.argv[2:]
 from websocket import create_connection
 ws = create_connection(SERVER)
 
-# Send Synthesis Request
-request = {"type": "request_synthesis"}
+# Generate and send synthesis request
+request = {"type": "request_synthesis", "files": [], "top_module": top_module}
+for file in files:
+    with open(file, "r") as f:
+        request["files"].append({"name": file, "body": f.read()})
+print(request)
 ws.send(json.dumps(request))
 
 # Log toolchain stdout/stderr to console
@@ -31,7 +35,7 @@ while True:
     res  = ws.recv()
     data = json.loads(res)
 
-    # Bitstream received! Close the WebSocket and break
+    # Bitstream received! Close the WebSocket and break.
     if data["type"] == "bitstream":
         ws.close()
         break
