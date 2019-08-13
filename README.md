@@ -8,27 +8,30 @@ For more information about WebFPGA, check out https://webfpga.io.
 
 ---
 
-To get started, make sure you have IceStorm installed. (This includes
-`yosys`, etc...)
-
-### Server
-The server is written in Node.js and is a WebSocket wrapper around
-a Makefile that runs the IceStorm flow.
-```console
-$ cd server
-$ npm install
-$ node app.js
-```
-
 ### Command-line Client
 The command-line client is written in Python and transmits Verilog source
 files and an optional `pinmap.pcf` file to the backend. The backend
 responds with real-time logs and the final, compressed bitstream.
+
+By default, it is configured to send jobs to `ws://icestorm.webfpga.io:2019`.
+You can change that by modifying the `SERVER=` string in `synthesis.py`.
 ```console
 $ cd client
 $ pip install websocket-client
 $ ./synthesis.py fpga_top blinky.v pinmap.pcf
 $ webfpga flash bitstream.bin
+```
+
+### Server
+The server is written in Node.js and is a WebSocket wrapper around
+a Makefile that runs the IceStorm flow.
+
+To get started, make sure you have IceStorm installed. (This includes
+`yosys`, etc...)
+```console
+$ cd server
+$ npm install
+$ node app.js
 ```
 
 ### Docker
