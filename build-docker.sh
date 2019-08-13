@@ -1,3 +1,4 @@
 #!/bin/bash
 
-docker build -t icestorm-server .
+version=0.0.1
+docker build -t icestorm-server:$version .
