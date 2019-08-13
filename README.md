@@ -27,7 +27,7 @@ responds with real-time logs and the final, compressed bitstream.
 ```console
 $ cd client
 $ pip install websocket-client
-$ ./synthesize.py fpga_top blinky.v pinmap.pcf
+$ ./synthesis.py fpga_top blinky.v pinmap.pcf
 $ webfpga flash bitstream.bin
 ```
 
