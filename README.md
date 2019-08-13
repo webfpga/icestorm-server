@@ -4,3 +4,26 @@
 
 To get started, make sure you have IceStorm installed. (This includes
 `yosys`, etc...)
+
+### Server
+The server is written in Node.js and is a WebSocket wrapper around
+a Makefile that runs the IceStorm flow.
+```console
+$ cd server
+$ npm install
+$ node app.js
+```
+
+### Command-line Client
+The command-line client is written in Python and transmits Verilog source
+files and an optional `pinmap.pcf` file to the backend. The backend
+responds with real-time logs and the final, compressed bitstream.
+```console
+$ cd client
+$ pip install websocket-client
+$ ./synthesize.py fpga_top blinky.v pinmap.pcf
+$ webfpga flash bitstream.bin
+```
+
+### Docker
+You can host the IceStorm Server via Docker.
