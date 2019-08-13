@@ -44,11 +44,11 @@ wss.on("connection", ws => {
 
 // Synthesis Request
 async function synthesize(ws, data) {
+  // Dual console.log + ws.send logging functionality
   const log = function() {
     console.log(...arguments);
     ws.send(JSON.stringify({type: "log", arguments}));
   };
-
   log("Recieved Synthesis Request...");
 
   // Generate a temp directory
@@ -69,11 +69,10 @@ async function synthesize(ws, data) {
     const bitstream = await run_icestorm_make(log, tmpdir, data.top_module);
 
     // Send the compressed bitstream to the WebSocket client.
-    /*ws.send(JSON.stringify({type: "bitstream", bitstream}));*/
+    ws.send(JSON.stringify({type: "bitstream", bitstream}));
   } catch (e) {
     console.error(e);
-    log(e.toString());
-    log("error: unable to synthesize");
+    log("error: unable to synthesize", e.toString());
   } finally {
     // Purge temp directory
     log("Purging temp directory...", tmpdir);
@@ -88,8 +87,7 @@ function run_icestorm_make(ws_log, dir, top_module) {
 
   // stdout/stderr logging
   const log = data => {
-    const str = data.toString();
-    process.stdout.write(str);
+    const str = data.toString().trim();
     ws_log(str);
   };
   proc.stdout.setEncoding("utf-8");
