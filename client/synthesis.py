@@ -52,6 +52,8 @@ while True:
         print(" ".join(strings))
 
 # Save the bitstream
+print("\nSaving bitstream.bin...")
 bitstream = base64.b64decode(data["bitstream"])
 with open("bitstream.bin", "wb") as file:
     file.write(bitstream)
+print("Bitstream saved!");
