@@ -1,4 +1,5 @@
 FROM ubuntu:19.04
+ARG DEBIAN_FRONTEND=noninteractive
 
 # IceStorm and friends
 RUN apt-get update && apt-get install -y \
