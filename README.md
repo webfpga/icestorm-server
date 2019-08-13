@@ -1,6 +1,12 @@
 # icestorm-server
 
-## Getting Started
+This is a fully open-source and self-hosted implementation of the WebFPGA
+interface and synthesis flow. The FPGA bitstream is generated on a
+remote server and returned to the client.
+
+For more information about WebFPGA, check out https://webfpga.io.
+
+---
 
 To get started, make sure you have IceStorm installed. (This includes
 `yosys`, etc...)
@@ -26,4 +32,4 @@ $ webfpga flash bitstream.bin
 ```
 
 ### Docker
-You can host the IceStorm Server via Docker.
+You can host `icestorm-server` via Docker.
