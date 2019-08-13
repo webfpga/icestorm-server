@@ -2,7 +2,7 @@ module top(input wire WF_CLK, output reg WF_LED);
     reg [23:0] counter;
 
     always @(posedge WF_CLK) begin
-        if (counter == (WF_BUTTON ? 8000000 : 4000000)) begin
+        if (counter == (WF_BUTTON ? 8000000 : 1000000)) begin
             WF_LED  <= ~WF_LED;
             counter <= 24'b0;
         end else begin
