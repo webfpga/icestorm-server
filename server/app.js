@@ -96,11 +96,16 @@ function run_icestorm_make(ws_log, dir, top_module) {
   proc.stderr.on("data", log);
 
   // Grab the compressed bitstream and return it via a Promise
-  return new Promise(resolve => {
+  return new Promise((resolve, reject) => {
     proc.on("close", status => {
       log("make exit code = " + status);
-      const bitstream = fs.readFileSync(`${dir}/out.bin.cbin`);
-      resolve(bitstream);
+
+      if (status == 0) {
+        const bitstream = fs.readFileSync(`${dir}/out.bin.cbin`);
+        resolve(bitstream);
+      }
+
+      reject("synthesis failed");
     });
   });
 }
