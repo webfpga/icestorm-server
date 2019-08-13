@@ -1,9 +1,10 @@
 #!/usr/bin/env node
 
 // Node.js Standard Library
-const os   = require("os");
-const fs   = require("fs");
-const path = require("path");
+const os    = require("os");
+const fs    = require("fs");
+const path  = require("path");
+const spawn = require("child_process").spawn;
 
 // NPM Dependencies
 const WebSocket = require("ws");
@@ -42,7 +43,7 @@ wss.on("connection", ws => {
 });
 
 // Synthesis Request
-function synthesize(ws, data) {
+async function synthesize(ws, data) {
   console.log("Recieved Synthesis Request...");
 
   // Generate a temp directory
@@ -60,17 +61,43 @@ function synthesize(ws, data) {
 
     // Run the IceStorm toolchain flow
     console.log("Running IceStorm flow with Make...");
-    run_icestorm_make(tmpdir, data.top_module);
+    const bitstream = await run_icestorm_make(tmpdir, data.top_module);
+
+    // Send the compressed bitstream to the WebSocket client.
+    ws.send(JSON.stringify({type: "bitstream", bitstream}));
   } catch (e) {
     console.error(e);
     console.error("error: unable to synthesize");
   } finally {
     // Purge temp directory
-    /*rmdir(tmpdir);*/
+    console.log("Purging temp directory...", tmpdir);
+    rmdir(tmpdir);
   }
 }
 
 function run_icestorm_make(dir, top_module) {
+  // Spawn IceStorm + Make toolchain flow
+  const args = [`BUILD_DIR=${dir}`, `TOP_MODULE=${top_module}`];
+  const proc = spawn("make", args, {cwd: "./synthesis/"});
+
+  // stdout/stderr logging
+  const log = data => {
+    const str = data.toString();
+    process.stdout.write(str);
+  };
+  proc.stdout.setEncoding("utf-8");
+  proc.stdout.on("data", log);
+  proc.stderr.setEncoding("utf-8");
+  proc.stderr.on("data", log);
+
+  // Grab the compressed bitstream and return it via a Promise
+  return new Promise(resolve => {
+    proc.on("close", status => {
+      console.log("make exit code = " + status);
+      const bitstream = fs.readFileSync(`${dir}/out.bin.cbin`);
+      resolve(bitstream);
+    });
+  });
 }
 
 // https://stackoverflow.com/a/32197381
