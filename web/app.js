@@ -15,11 +15,7 @@ const wss  = new WebSocket.Server({port},
 
 // Create WebSocket Message Handler
 wss.on("connection", ws => {
-  ws.on("message", on_msg(ws));
-});
-
-function on_msg(ws) {
-  return msg => {
+  ws.on("message", msg => {
     // Parse JSON WebSocket Message
     let data;
     try {
@@ -42,8 +38,8 @@ function on_msg(ws) {
     }
 
     console.log("----");
-  };
-}
+  });
+});
 
 // Synthesis Request
 function synthesize(ws, data) {
