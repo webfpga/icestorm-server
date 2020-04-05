@@ -1,11 +1,11 @@
 FROM ubuntu:20.04
 ARG DEBIAN_FRONTEND=noninteractive
 
-RUN apt-get update && apt-get install -y iputils-ping
+#RUN apt-get update && apt-get install -y iputils-ping
 
 # enable apt-cacher
-RUN ping 10.0.10.62 -c 1 -W 0.1 &&\
-    sed -e 's/http:\/\//http:\/\/10.0.10.62:3142\//g' -i /etc/apt/sources.list
+#RUN ping 10.0.10.62 -c 1 -W 0.1 &&\
+RUN sed -e 's/http:\/\//http:\/\/10.0.10.62:3142\//g' -i /etc/apt/sources.list
 
 # IceStorm prerequiresites
 RUN apt-get update && apt-get install -y \
