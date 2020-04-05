@@ -1,0 +1,36 @@
+hierarchy -generate LogicCell40 i:in* i:*in i:clk i:ce i:sr o:*out
+hierarchy -generate ICE_GB i:USERSIGNALTOGLOBALBUFFER o:GLOBALBUFFEROUTPUT
+hierarchy -generate PRE_IO_GBUF i:PADSIGNALTOGLOBALBUFFER o:GLOBALBUFFEROUTPUT
+hierarchy -generate VCC o:*
+hierarchy -generate GND o:*
+hierarchy -generate IO_PAD i:OE i:DIN o:DOUT io:PACKAGEPIN
+hierarchy -generate PRE_IO o:PADOEN o:PADOUT i:PADIN i:CLOCKENABLE o:DIN0 o:DIN1 \
+		i:DOUT0 i:DOUT1 i:INPUTCLK i:LATCHINPUTVALUE i:OUTPUTCLK i:OUTPUTENABLE
+hierarchy -generate *PLL40* i:PACKAGEPIN i:BYPASS i:DYNAMICDELAY i:EXTFEEDBACK i:LATCHINPUTVALUE \
+		o:LOCK o:PLLOUT* i:REFERENCECLK i:RESETB i:SCLK i:SDI o:SDO i:PLLIN
+hierarchy -generate SB_RAM40_4K o:RDATA i:RADDR i:WADDR i:MASK i:WDATA i:RCLKE i:RCLK i:RE i:WCLKE i:WCLK i:WE
+hierarchy -generate SB_MAC16 i:CLK i:CE i:C i:A i:B i:D i:AHOLD i:BHOLD i:CHOLD i:DHOLD i:IRSTTOP i:IRSTBOT \
+   i:ORSTTOP i:ORSTBOT  i:OLOADTOP i:OLOADBOT i:ADDSUBTOP i:ADDSUBBOT i:OHOLDTOP i:OHOLDBOT i:CI i:ACCUMCI \
+	 i:SIGNEXTIN o:O o:CO o:ACCUMCO o:SIGNEXTOUT
+hierarchy -generate SB_SPRAM256KA i:ADDRESS i:DATAIN i:MASKWREN i:WREN i:CHIPSELECT i:CLOCK i:STANDBY i:SLEEP \
+   i:POWEROFF i:DATAOUT
+hierarchy -generate SB_RGBA_DRV i:CURREN i:RGBLEDEN i:RGB*PWM o:RGB*
+hierarchy -generate SB_LED_DRV_CUR i:EN o:LEDPU
+hierarchy -generate SB_RGB_DRV i:RGBPU i:RGBLEDEN i:RGB*PWM o:RGB*
+hierarchy -generate SB_LFOSC i:CLKLFPU i:CLKLFEN o:CLKLF
+hierarchy -generate SB_HFOSC i:CLKHFPU i:CLKHFEN o:CLKHF
+hierarchy -generate SB_LEDDA_IP i:LEDDCS i:LEDDCLK i:LEDDDAT* i:LEDDADDR* i:LEDDDEN i:LEDDEXE i:LEDDRST o:PWMOUT* o:LEDDON
+
+hierarchy -generate ICE_CARRY_IN_MUX i:*in o:*out
+hierarchy -generate *Mux* i:I o:O
+hierarchy -generate DummyBuf i:I o:O
+hierarchy -generate Odrv* i:I o:O
+hierarchy -generate Sp12to4 i:I o:O
+hierarchy -generate INV i:I o:O
+hierarchy -generate gio2CtrlBuf i:I o:O
+hierarchy -generate CascadeBuf i:I o:O
+
+hierarchy -generate SMCCLK o:CLK
+
+hierarchy -check
+tee -o tmedges_unrenamed.tmp edgetypes
