@@ -1,11 +1,14 @@
 FROM ubuntu:20.04
 ARG DEBIAN_FRONTEND=noninteractive
 
+# enable apt-cacher
+RUN sed -e 's/http:\/\//http:\/\/10.0.10.62:3142\//g' -i /etc/apt/sources.list
+
 # IceStorm prerequiresites
 RUN apt-get update && apt-get install -y \
         build-essential clang bison flex libreadline-dev \
         gawk tcl-dev libffi-dev git mercurial graphviz   \
-        xdot pkg-config python python3 libftdi-dev \
+        xdot pkg-config python2 python3 libftdi-dev \
         qt5-default python3-dev libboost-all-dev cmake
 
 # IceStorm
