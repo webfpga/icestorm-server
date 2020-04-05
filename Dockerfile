@@ -14,21 +14,20 @@ RUN apt-get update && apt-get install -y \
         xdot pkg-config python2 python3 libftdi-dev \
         qt5-default python3-dev libboost-all-dev cmake
 
+COPY repositories /
+
 # IceStorm
-RUN git clone https://github.com/cliffordwolf/icestorm.git /icestorm
-WORKDIR /icestorm
+WORKDIR /repositories/icestorm
 RUN make -j$(nproc)
 RUN make install
 
 # Arachne-PNR
-RUN git clone https://github.com/cseed/arachne-pnr.git /arachne-pnr
-WORKDIR /arachne-pnr
+WORKDIR /repositories/arachne-pnr
 RUN make -j$(nproc)
 RUN make install
 
 # Yosys
-RUN git clone https://github.com/cliffordwolf/yosys.git /yosys
-WORKDIR /yosys
+WORKDIR /repositories/yosys
 RUN make -j$(nproc)
 RUN make install
 
