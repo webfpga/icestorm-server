@@ -1,0 +1,4 @@
+set_io D1 99
+set_io --warn-no-port D2 98
+set_io D3 97
+set_io --warn-no-port clk 21
