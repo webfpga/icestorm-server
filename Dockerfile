@@ -2,7 +2,7 @@ FROM ubuntu:20.04
 ARG DEBIAN_FRONTEND=noninteractive
 
 # enable apt-cacher
-RUN sed -e 's/http:\/\//http:\/\/10.0.10.62:3142\//g' -i /etc/apt/sources.list
+#RUN sed -e 's/http:\/\//http:\/\/10.0.10.62:3142\//g' -i /etc/apt/sources.list
 
 # IceStorm prerequiresites
 RUN apt-get update && apt-get install -y \
