@@ -1,5 +1,6 @@
 #!/bin/bash
 
+<<<<<<< HEAD
 cache=false
 ip addr | grep 10.0.10.0/24 && cache=true
 
