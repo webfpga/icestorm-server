@@ -4,8 +4,6 @@ ARG BASE_IMAGE=ubuntu:20.04
 FROM $BASE_IMAGE
 ARG DEBIAN_FRONTEND=noninteractive
 
-RUN apt-get update && apt-get install -y iputils-ping
-
 # enable apt-cacher
 RUN "$USE_CACHE" && sed -e 's/http:\/\//http:\/\/10.0.10.62:3142\//g' -i /etc/apt/sources.list
 
