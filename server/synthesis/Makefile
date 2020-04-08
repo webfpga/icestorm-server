@@ -10,7 +10,7 @@ all:
 
 	# Place and route using arachne
 	touch "$(BUILD_DIR)/pinmap.pcf"
-	nextpnr -d $(DEVICE) -P $(FOOTPRINT)\
+	nextpnr-ice40 -d $(DEVICE) -P $(FOOTPRINT)\
 		-o "$(BUILD_DIR)/out.asc" -p "$(BUILD_DIR)/pinmap.pcf"\
 		"$(BUILD_DIR)/out.blif"
 
