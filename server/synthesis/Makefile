@@ -10,9 +10,9 @@ all:
 
 	# Place and route using arachne
 	touch "$(BUILD_DIR)/pinmap.pcf"
-	arachne-pnr -d $(DEVICE) -P $(FOOTPRINT)\
-				-o "$(BUILD_DIR)/out.asc" -p "$(BUILD_DIR)/pinmap.pcf"\
-				"$(BUILD_DIR)/out.blif"
+	nextpnr -d $(DEVICE) -P $(FOOTPRINT)\
+		-o "$(BUILD_DIR)/out.asc" -p "$(BUILD_DIR)/pinmap.pcf"\
+		"$(BUILD_DIR)/out.blif"
 
 	# Convert to bitstream using IcePack
 	icepack "$(BUILD_DIR)/out.asc" "$(BUILD_DIR)/out.bin"
