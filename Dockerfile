@@ -2,7 +2,7 @@ FROM ubuntu:20.04
 ARG DEBIAN_FRONTEND=noninteractive
 
 # enable apt-cacher
-RUN cat >/dev/tcp/10.0.10.62/3142 </dev/null\
+RUN bash -c 'cat >/dev/tcp/10.0.10.62/3142 </dev/null'\
     && sed -e 's/http:\/\//http:\/\/10.0.10.62:3142\//g' -i /etc/apt/sources.list
 
 # IceStorm prerequiresites
