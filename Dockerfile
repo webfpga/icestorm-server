@@ -1,4 +1,4 @@
-FROM webfpga/icestorm-base:0.2.1
+FROM webfpga/icestorm-base:0.2.0
 ARG DEBIAN_FRONTEND=noninteractive
 
 # enable apt-cacher
