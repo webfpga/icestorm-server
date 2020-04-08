@@ -1,9 +1,9 @@
-FROM webfpga/icestorm-base:0.2.0
+FROM webfpga/icestorm-base:0.2.1
 ARG DEBIAN_FRONTEND=noninteractive
 
 # enable apt-cacher
-RUN bash -c 'cat >/dev/tcp/10.0.10.62/3142 </dev/null'\
-    && sed -e 's/http:\/\//http:\/\/10.0.10.62:3142\//g' -i /etc/apt/sources.list
+RUN timeout 1 bash -c 'cat >/dev/tcp/10.0.10.62/3142 </dev/null'\
+    && sed -e 's/http:\/\//http:\/\/10.0.10.62:3142\//g' -i /etc/apt/sources.list; exit 0
 
 # Node.js for the web server
 RUN apt-get update && apt-get install -y nodejs npm

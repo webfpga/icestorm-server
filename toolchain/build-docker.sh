@@ -3,7 +3,7 @@
 cache=false
 ip addr | grep 10.0.10.0/24 && cache=true
 
-version=0.2.0
+version=0.2.1
 name="webfpga/icestorm-base"
 
 docker build --tag $name:$version .
