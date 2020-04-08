@@ -28,19 +28,5 @@ RUN make install
 # Yosys
 WORKDIR /yosys
 RUN make -j$(nproc)
-RUN make install
 
-# Node.js for the web server
-RUN apt-get update && apt-get install -y nodejs npm
-
-# Install NPM dependencies
-WORKDIR /app
-COPY ./server/package*.json ./
-RUN npm install
-
-# Copy Node.js application source
-COPY ./server/app.js .
-COPY ./server/synthesis/ ./synthesis
-
-# Start Node.js app
-CMD ["node", "app.js"]
+CMD ["bash"]
