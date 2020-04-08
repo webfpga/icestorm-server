@@ -4,3 +4,5 @@
     - Use ubuntu:20.04 as the only base image.
 0.1.0:
     - Migrate from arachne-pnr to nextpnr
+0.1.1:
+    - Fix nextpnr bin name to nextpnr-ice40
