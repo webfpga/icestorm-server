@@ -7,4 +7,3 @@ version=0.2.2-$(git rev-parse --short HEAD)
 name="webfpga/icestorm-base"
 
 docker build --tag $name:$version .
-docker tag $name:$version $name:latest
