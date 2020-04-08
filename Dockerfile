@@ -22,7 +22,13 @@ RUN make -j$(nproc)
 RUN make install
 
 # Arachne-PNR
-WORKDIR /arachne-pnr
+#WORKDIR /arachne-pnr
+#RUN make -j$(nproc)
+#RUN make install
+
+# nextpnr
+WORKDIR /nextpnr
+RUN cmake -DARCH=ice40 .
 RUN make -j$(nproc)
 RUN make install
 
