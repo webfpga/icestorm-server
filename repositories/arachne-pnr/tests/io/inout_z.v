@@ -1,7 +1,0 @@
-
-module chip ();
-
-
-
-endmodule
-

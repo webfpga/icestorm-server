@@ -1,3 +1,0 @@
-.model top
-.gate SB_DFF C=c D=d Q=q
-.attr src "\040"
