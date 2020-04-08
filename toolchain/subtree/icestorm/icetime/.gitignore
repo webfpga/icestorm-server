@@ -1,7 +1,0 @@
-icetime
-icetime.exe
-timings.inc
-timings-*.cc
-test[0-9]*
-*.d
-*.o
