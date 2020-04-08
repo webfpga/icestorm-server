@@ -6,3 +6,5 @@
     - Migrate from arachne-pnr to nextpnr
 0.1.1:
     - Fix nextpnr bin name to nextpnr-ice40
+0.1.2:
+    - Fix nextpnr and yosys Makefile flow to use json exchange files.
