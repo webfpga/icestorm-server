@@ -1,5 +1,5 @@
+#!/bin/bash
 cd ..
-
-for repo in yosys icestorm nextpnr; do
-    git subtree -P repositories/$repo pull https://github.com/YosysHQ/$repo master --squash
-done
+git subtree -P repositories/icestorm pull https://github.com/cliffordwolf/icestorm master --squash
+git subtree -P repositories/yosys    pull https://github.com/YosysHQ/yosys         master --squash
+git subtree -P repositories/nextpnr  pull https://github.com/YosysHQ/nextpn        master --squash
