@@ -1,5 +1,4 @@
-ARG BASE_IMAGE=ubuntu:20.04
-FROM $BASE_IMAGE
+FROM ubuntu:20.04
 ARG DEBIAN_FRONTEND=noninteractive
 
 # enable apt-cacher
