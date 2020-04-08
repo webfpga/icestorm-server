@@ -1,0 +1,2 @@
+0.0.4:
+    - Better USE_CACHE antics. Use /dev/tcp to detect caching host.
