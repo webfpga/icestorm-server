@@ -12,7 +12,7 @@ RUN apt-get update && apt-get install -y \
         xdot pkg-config python2.7 python3 libftdi-dev \
         qt5-default python3-dev libboost-all-dev cmake libeigen3-dev
 
-COPY ./repositories /
+COPY ./subtree /
 
 # IceStorm
 WORKDIR /icestorm
