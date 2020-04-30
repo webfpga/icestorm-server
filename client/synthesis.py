@@ -3,16 +3,16 @@
 ## pip install websocket-client
 ##
 
-SERVER="ws://icestorm.webfpga.io:2019"
+SERVER="ws://icestorm.webfpga.com:2019"
 
 import socket
-def local_cache_available():
-    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    status = (sock.connect_ex(("10.0.10.62", 2019)) == 0)
-    sock.close()
-    return status
-if local_cache_available():
-    SERVER="ws://10.0.10.62:2019"
+#def local_cache_available():
+#    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+#    status = (sock.connect_ex(("10.0.10.62", 2019)) == 0)
+#    sock.close()
+#    return status
+#if local_cache_available():
+#    SERVER="ws://10.0.10.62:2019"
 
 import sys
 import json
